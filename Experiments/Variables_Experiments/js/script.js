@@ -72,7 +72,7 @@ function draw() {
             console.log(`Hit 2`);
         }
         
-            if(circle.x <= width / 2) {
+            if(circle.x < width / 2) {
              circle.speed = 0;
             console.log(`Hit 3`);    
         }
