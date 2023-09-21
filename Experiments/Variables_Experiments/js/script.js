@@ -56,8 +56,9 @@ function draw() {
 
     circle.x += circle.speed;
     
+    //translate(circle.speed, 0);
     circle.fill = map(mouseY, 0, height, 0, 255);
-    fill(circle.fill, 0, 0);
+    fill(255, circle.fill, circle.fill);
     ellipse(circle.x, circle.y, circle.size);
 
     if (circle.x >= width) {
@@ -67,12 +68,12 @@ function draw() {
         
         if (circle.size >= height / 2) {
             circle.speed = -3;
-            circle.x += circle.speed;
+            //circle.x += circle.speed;
             console.log(`Hit 2`);
         }
         
-        if(circle.x <= width / 2) {
-            circle.speed = 0;
+            if(circle.x <= width / 2) {
+             circle.speed = 0;
             console.log(`Hit 3`);    
         }
     }
