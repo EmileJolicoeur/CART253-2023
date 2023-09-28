@@ -8,6 +8,9 @@
 
 "use strict";
 
+
+
+
 //
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -18,5 +21,7 @@ function setup() {
 
 //
 function draw() {
-
+    //StopWatch [millis = nbSec relative to refreshPage]
+    let currentTimeSeconds = round(millis()/1000);
+    print(currentTimeSeconds);
 }
