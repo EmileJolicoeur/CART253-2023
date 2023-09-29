@@ -15,15 +15,19 @@ let asteroid    =   {
     size:   100,
     vx: 0,
     vy: 0,
-    ax: 0,
-    ay: 0,
     acceleration:   0.01,
-    maxSpeed:   10,
+    speed:   10,
     fill:   {
         r:  255,
         g:  0,
         b:  0,
-    }
+    },
+
+    // nb: {
+    //     current:    undefined,
+    //     max:    undefined,
+    //     constr: 20,
+    //}
 };
 
 //Values of the player
@@ -44,46 +48,49 @@ let ship    =   {
     }
 };
 
-let angle   =   0;
+//visual values
+let asteroidImage;
+let shipImage;
 
 //Hud values
 let score   =   0;
+let currentTimeSeconds  =   undefined;
 
-//
+
+//Loading Images
 function preload()  {
-
+    shipImage   =   loadImage('assets/images/Dodge-em_Ship.png');
+    asteroidImage   =   loadImage('assets/images/asteroid_1.png');
 }
 
 //setting  starting variables
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
-    noCursor();
-
-    //Hud
-        //StopWatch [millis = nbSec relative to refreshPage]    [WIP]
-    let currentTimeSeconds = round(millis()/1000);
-    console.log(`Time: ${currentTimeSeconds}`);
-
+    
     //Asteroid location + size
     asteroid.y  =   random(0, height);
     asteroid.size   =   random(100, 175);
-    asteroid.vx =   asteroid.maxSpeed;
+    asteroid.vx =   asteroid.speed;
+    //asteroid.speed  =   random(2, 10);
 
     //Ship starting location
     ship.x  =   width/2;
     ship.y  =   height/2;
-
-    //Ship direction    [WIP]
-    //angle.x =   mouseX;
-    //angle.y =   mouseY;
 }
 
 //
 function draw() {
     background(0);
 
-    //Displaying static
+    //noCursor();
+
+    //Hud
+        //StopWatch [millis = nbSec relative to refreshPage]    [WIP]
+    currentTimeSeconds = round(millis()/1000);
+    console.log(`Time: ${currentTimeSeconds}`);
+
+    //Displaying backgroundStars
     for (let i = 0; i < 1000; i ++)  {
         let x   =   random(0, width);
         let y   =   random(0, height);
@@ -96,21 +103,38 @@ function draw() {
     asteroid.y  +=  asteroid.vy;
 
     //Resetting the asteroid
+            
     if  (asteroid.x > width)    {
+        //Next asteroid's properties
         asteroid.x  =   0;
         asteroid.y  =   random(0, height);
         asteroid.size   =   random(100, 175);
-        asteroid.vx +=  0.01;
+        asteroid.vx +=  asteroid.acceleration;
+            
+        //Hud values
         score += 1;
-        console.log(`Score: ${score}`);
+        
+        //Debugging
+        console.log(`[Score: ${score}]`);
+        //console.log(`[Nb.Asteroid: ${asteroid.nb.current}]`);
     }
 
     //Creating the asteroid
-    fill(asteroid.fill.r, asteroid.fill.g, asteroid.fill.b);
-    ellipse(asteroid.x, asteroid.y, asteroid.size);
+    
+    push();
+    //     //Basic circle placeholder
+    // fill(asteroid.fill.r, asteroid.fill.g, asteroid.fill.b);
+    // ellipseMode(CENTER);
+    // ellipse(asteroid.x, asteroid.y, asteroid.size);
+    imageMode(CENTER);
+    angleMode(DEGREES);
+    image(asteroidImage, asteroid.x, asteroid.y, asteroid.size, asteroid.size);
+    pop();
+
+
 
     //Ship controls
-    //Movement mouseX
+        //Movement mouseX
     if  (mouseX < ship.x)   {
         ship.ax =   -ship.acceleration;
         console.log(`Mouse:L`);
@@ -131,15 +155,21 @@ function draw() {
     ship.vy =   constrain(ship.vy, -ship.maxSpeed, ship.maxSpeed);
 
         //Ship position
-    ship.x  +=  ship.vx;
-    ship.x  =   constrain(ship.x, 0, width - ship.size);
-    ship.y  +=  ship.vy;
-    ship.y  =   constrain(ship.y, 0, height - ship.size);
+    let constraintEdges =   ship.size/2;
 
+    ship.x  +=  ship.vx;
+    ship.x  =   constrain(ship.x, constraintEdges, width - constraintEdges);
+    ship.y  +=  ship.vy;
+    ship.y  =   constrain(ship.y, constraintEdges, height - constraintEdges);
+
+    //Creating the ship
     push();
-    fill(ship.fill.r, ship.fill.g, ship.fill.b);
-    rect(ship.x, ship.y, ship.size);
-    //rotate(angle.y);
+    //     //Basic square placeholder
+    // fill(ship.fill.r, ship.fill.g, ship.fill.b);
+    // rectMode(CENTER);
+    // rect(ship.x, ship.y, ship.size);
+    imageMode(CENTER);
+    image(shipImage, ship.x, ship.y, ship.size, ship.size);
     pop();
     
     //Proximity sensors
@@ -154,5 +184,13 @@ function draw() {
     //Hud
     textSize(32);
     fill(0, 0, 255);
-    text('Score:' + score /**+ 'Time:' + currentTimeSeconds*/, 10, 30);
+    text('Score: ' + score + '  Time: ' + currentTimeSeconds, 10, 30);
+
+    //Debugging: mouse location
+    console.log(`mouse x: ${mouseX} mouse y: ${mouseY}`);
+    if (mouseIsPressed === true)  {
+        cursor(CROSS);
+    }   else    {
+        noCursor();
+    }
 }
