@@ -72,7 +72,7 @@ function setup() {
     asteroid.y  =   random(0, height);
     asteroid.size   =   random(100, 175);
     asteroid.vx =   asteroid.speed;
-    //asteroid.speed  =   random(2, 10);
+    
 
     //Ship starting location
     ship.x  =   width/2;
@@ -82,8 +82,6 @@ function setup() {
 //
 function draw() {
     background(0);
-
-    //noCursor();
 
     //Hud
         //StopWatch [millis = nbSec relative to refreshPage]    [WIP]
@@ -102,15 +100,15 @@ function draw() {
     asteroid.x  +=  asteroid.vx;
     asteroid.y  +=  asteroid.vy;
 
-    //Resetting the asteroid
-            
+    //Resetting the asteroid     
     if  (asteroid.x > width)    {
         //Next asteroid's properties
         asteroid.x  =   0;
         asteroid.y  =   random(0, height);
         asteroid.size   =   random(100, 175);
         asteroid.vx +=  asteroid.acceleration;
-            
+        asteroid.speed  =   random(2, 10);
+        
         //Hud values
         score += 1;
         
@@ -127,8 +125,10 @@ function draw() {
     // ellipseMode(CENTER);
     // ellipse(asteroid.x, asteroid.y, asteroid.size);
     imageMode(CENTER);
-    angleMode(DEGREES);
-    image(asteroidImage, asteroid.x, asteroid.y, asteroid.size, asteroid.size);
+        //push();
+        angleMode(DEGREES);
+        image(asteroidImage, asteroid.x, asteroid.y, asteroid.size, asteroid.size);
+        //pop();
     pop();
 
 
