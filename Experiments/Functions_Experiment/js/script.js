@@ -215,8 +215,160 @@
 // }
 
 
-//Video 5.5:    States
+// //Video 5.5:    States
+
+// let circle  =   {
+//     x:  0,
+//     y:  0,
+//     size:   100,
+//     vx: 0,
+//     vy: 0,
+//     speed:  2,
+// };
+
+// let state  =    `title`;    //possible states = title, animation, ending
+
+// function setup()    {
+//     createCanvas(500, 500);
+//     circle.y    =   height/2;
+//     circle.vx   =   circle.speed;
+    
+//     textSize(32);
+//     textAlign(CENTER, CENTER);
+// }
+
+// function draw() {
+//     background(0);
+
+//     if (state === `title`)    {
+//         title();
+//     }   else if (state === `animation`) {
+//         anim();
+//     }   else if (state === `ending`)    {
+//         end();
+//     }
+// }
+
+//     //Title Txt
+// function title()    {
+//     fill(255);
+//     text(`Life.`, width/2, height/2);
+// }
+//     //Animation
+// function anim() {
+//     circle.x    +=  circle.vx;
+//     circle.y    +=  circle.vy;
+
+//     if (circle.x > width)   {
+//         state   =   `ending`;
+//     }
+
+//     ellipse(circle.x, circle.y, circle.size);
+// }
+//     //Ending Txt.
+// function end()  {
+//     fill(127);
+//     text(`It's all over`, width/2, height/2);
+// }
+
+// function keyPressed()   {
+//     if (state === `title`)  {
+//         state   =   `animation`;
+//     }  
+// }
+
+
+// //Video 5.6:    KeyboardInput
+
+// let bg  =   0;
+
+// function setup()    {
+//     createCanvas(500, 500);
+// }
+
+// function draw() {
+//     background(bg);
+
+//     // textAlign(CENTER, CENTER);
+//     // textSize(64);
+//     // fill(255);
+//     // text(keyCode, width/2, height/2);
+
+//     if (keyIsDown(65))  {
+//         rectMode(CENTER);
+//         rect(250, 250, 100, 100)
+//     }
+// }
+
+//     /**key  =   latest key pressed
+//      * keyCode  =   ASCII nb        [keycode.info = great way to find ASCII nb]*/
+// // function keyPressed()   {
+// //     bg  =   random(0, 255);
+
+// //     if  (key    === `a`)    {
+// //         bg  =   0;
+// //     }   else if (key === `s`)   {
+// //         bg  =   100;
+// //     }   else if (key === `d`)   {
+// //         bg  =   255;
+// //     }
+
+// //         //keyPressed, keyReleased, keyTyped
+// //     if (keyCode === 38  /**UP_ARROW*/)  {
+// //         bg  +=  10;
+// //         bg  =   constrain(bg, 0, 255);
+// //     }   else if (keyCode === 40 /**DOWN_ARROW*/)    {
+// //         bg  += -10;
+// //         bg  =   constrain(bg, 0, 255);
+// //     }
+// // }
+
+
+//Video 5.7:    Automated movement:
+
+let circle  =   {
+    x:  250,
+    y:  250,
+    size:   100,
+    vx: 0,
+    vy: 0,
+    speed:  2,
+};
 
 function setup()    {
-    
+    createCanvas(500, 500);
+
+    // circle.vx   =   circle.speed;
+    // circle.vy   =   circle.speed;
+}
+
+function draw() {
+    background(0);
+
+    // //Using random for pathing:
+    // let change  =   random();
+    // if  (change <   0.01)   {
+    //     circle.vx   =   random(-circle.speed, circle.speed);
+    //     circle.vy   =   random(-circle.speed, circle.speed);
+    // }
+
+    let dx  =   circle.x    -   mouseX;   //dx = difference in x axis
+    let dy  =   circle.y    -   mouseY;
+
+    if (dx < 0) {
+        circle.vx   =   circle.speed;
+    }   else if (dx > 0)    {
+        circle.vx   =   -circle.speed;
+    }
+
+    if (dy <0)  {
+        circle.vy   =   circle.speed;
+    }   else if (dy > 0)    {
+        circle.vy   =   -circle.speed;
+    }
+
+    circle.x    +=  circle.vx;
+    circle.y    +=  circle.vy;
+
+    ellipse(circle.x, circle.y, circle.size);
 }
