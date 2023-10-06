@@ -180,7 +180,7 @@ function aiLover2() {
 function shyState(lover) {
     //shy state value
     let change  =   random();
-    lover2.speed    =   6;
+    lover2.speed    =   5;
 
     if  (change < lover.ch) {
         lover.vx    =   random(-lover.speed, lover.speed);
@@ -192,7 +192,7 @@ function runState() {
     //run state values
     let dx  =   lover2.x - lover1.x;
     let dy  =   lover2.y - lover1.y;
-    lover2.speed    =   4.5;
+    lover2.speed    =   3;
     
     if  (dx > 0)    {
         lover2.vx   =   lover2.speed;
