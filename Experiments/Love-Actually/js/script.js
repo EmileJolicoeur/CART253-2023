@@ -36,7 +36,7 @@ let loverOpp    =   {   //Opponent ai
     vy: 0,
     speed:  10,
     fillB:   255,
-    ch: 0.05,
+    ch: 0.07,
 };
 
 //Game state
@@ -271,5 +271,4 @@ function mousePressed() {
     if  (state === `title`) {
         state   =   `sim`;
     }
-
 }
