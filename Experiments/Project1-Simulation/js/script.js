@@ -360,7 +360,7 @@ function buttonInstructions()   {
     let hintTxt =   `(use keyboard)`;
     
     if (butMod.lit.colPick === 0)   {                       //Red Light
-        buttonTxt   =   `In 10, 6 is mirrored by 4. The INPUT is a mirror letter`;
+        buttonTxt   =   `In 10, 7 is mirrored by 4. The INPUT is a mirror letter`;
     }   else if (butMod.lit.colPick === 1)  {
         buttonTxt   =   `Awaiting corresponding KEY INPUT`;
     }   else if (butMod.lit.colPick === 2)  {
