@@ -1,16 +1,5 @@
-//
-//Bomb Defusing
-//Emile Jolicoeur
-//
-//This is a template. You must fill in the title, author, and this description to match your project!
-//
-
-"use strict";
-
-
-
-//Variables:
 let phase	=	        `Start`	//Start, Puzzle, Lose, Win
+
 
 let bg	=   {
 x:		                undefined,  //Center
@@ -35,16 +24,16 @@ let bomb	=	{
 	},
 };
 
-    //Module Basic Variables:
-let node    =   {
-    x:                  undefined,
-    y:                  undefined,
-    size:               128,
-    position:           undefined,
-        //Color
-    completed:          false,
-    fill:               0,
-}
+//     //Module Basic Variables:
+// let node    =   {   //class     Node    [ADDED]
+//     x:                  undefined,
+//     y:                  undefined,
+//     size:               128,
+//     position:           undefined,
+//         //Color
+//     completed:          false,
+//     fill:               0,
+// }
     //Button Module Variables:
 let butMod  =   {
     but:    {
@@ -75,6 +64,7 @@ let butMod  =   {
     },
 }
 
+
 /**Time values (Timer module)*/
     //Minutes
 let maxMin  =           undefined;
@@ -87,6 +77,7 @@ let armed = true;
 
 
     //Sprite Variables:
+let images  =   [];
 let bgImg;
 let bombDisplayX, bombDisplayY, bombDisplayTopZ, bombDisplayBotZ;
 let timeModImg, wireModImg, buttonModImg, wordAssGameImg;
@@ -94,32 +85,42 @@ let timeModImg, wireModImg, buttonModImg, wordAssGameImg;
 
 
 function preload()  {
-        //Background
-    bgImg   =   loadImage(`assets/images/Sim_Bg.png`);
-        //Bomb
-    bombDisplayX    =   loadImage(`assets/images/Sim_bomb-F.png`);
-    bombDisplayY    =   loadImage(`assets/images/Sim_bomb-S.png`);
-    bombDisplayTopZ =   loadImage(`assets/images/Sim_bomb-T.png`);
-    bombDisplayBotZ =   loadImage(`assets/images/Sim_bomb-B.png`);
-        //Modules
-    timeModImg  =   loadImage(`assets/images/Sim_TimMod.png`);
-    wireModImg  =   loadImage(`assets/images/Sim_WirMod.png`);
-    wordAssGameImg  =   loadImage(`assets/images/Sim_wagMod.png`);
-    buttonModImg    =   loadImage(`assets/images/Sim_BtnMod.png`);
+    for (let i = 0; i < 9; i++) {
+        images[i]   =   loadImage(`assets/images/Anything_${i}.png`);
+    }
 }
 
 function setup()    {
     createCanvas(windowHeight, windowHeight);
+    //Images
+        //Background
+    bgImg   =   images[0];
+    bombDisplayTopZ =   images[1];
+    bombDisplayX    =   images[2];
+    bombDisplayBotZ =   images[3];
+    bombDisplayY    =   images[4];
+    timeModImg  =   images[5];
+    buttonModImg    =   images[6];
+    wireModImg  =   images[7];
+    wordAssGameImg  =   images[8];
+
+    timer   =   new ModuleTIM();
+
+    for (let i = 0; i < nbNodes; i++)   {
+        let position    =   random(0, 5);
+        let node    =   new Node(position);
+        nodes.push(node);
+    }
 
         //Bomb Values
     bomb.x	=	width/2;
 	bomb.y	=	height/2;
 
         //Timer starting value:
-    maxMin =   floor(random(1, 4));
-    maxSec=    60*maxMin;
+    //maxMin =   floor(random(1, 4));
+    //maxSec=    60*maxMin;
 
-    console.log(`width = ${width} \nheight = ${height}`)
+    console.log(`width = ${width} \nheight = ${height} \n${bomb.size1} \n${bomb.size2}`)
 
         //node values (temporary)
     node.x  =   width/2;
@@ -134,7 +135,7 @@ function setup()    {
     colorIndGeneration();
 }
 
-// /**  Determining Modules for nodes   */  //For future use
+// /**  Determining Modules for nodes   */  //class     Node        [ADDED]
 // function nodeType() {
 //     node.typeSel =   round(random(1, 4));
 
@@ -149,33 +150,33 @@ function setup()    {
 //     console.log(`Type:${node.type}`);
 // }
 
-function nodeLocation() {
-    node.position   =   round(random(0, 5));
+// function nodeLocation() {                   //class     Node        [ADDED]
+//     node.position   =   round(random(0, 5));
 
-    console.log(`ModuleLocation: ${node.position}`);
+//     console.log(`ModuleLocation: ${node.position}`);
 
-    if (node.position === 0)    {
-        node.x  =   9*width/26;
-        node.y  =   17*height/40;
-    }   else if (node.position === 1)    {
-        node.x  =   9*width/26;
-        node.y  =   23*height/40;
-    }   else if (node.position === 2)    {
-        node.x  =   width/2;
-        node.y  =   17*height/40;
-    }   else if (node.position === 3)    {
-        node.x  =   width/2;
-        node.y  =   23*height/40;
-    }   else if (node.position === 4)    {
-        node.x  =   17*width/26;
-        node.y  =   17*height/40;
-    }   else if (node.position === 5)    {
-        node.x  =   17*width/26;
-        node.y  =   23*height/40;
-    } 
-}
+//     if (node.position === 0)    {
+//         node.x  =   9*width/26;
+//         node.y  =   17*height/40;
+//     }   else if (node.position === 1)    {
+//         node.x  =   9*width/26;
+//         node.y  =   23*height/40;
+//     }   else if (node.position === 2)    {
+//         node.x  =   width/2;
+//         node.y  =   17*height/40;
+//     }   else if (node.position === 3)    {
+//         node.x  =   width/2;
+//         node.y  =   23*height/40;
+//     }   else if (node.position === 4)    {
+//         node.x  =   17*width/26;
+//         node.y  =   17*height/40;
+//     }   else if (node.position === 5)    {
+//         node.x  =   17*width/26;
+//         node.y  =   23*height/40;
+//     } 
+// }
 
-function colorIndGeneration()   {
+function colorIndGeneration()   {           //class     ModuleBTN   [ADDED]
     butMod.lit.colPick  =   round(random(3));
 
     if (butMod.lit.colPick === 0) {
@@ -252,7 +253,7 @@ function puzzleScreen()	{
     countdown();
 }
 
-function countdown()    {
+function countdown()    {                   //class     ModuleTIM   [ADDED]
     countdownSec    =   round(millis()/1000);
     if (timeSec != maxSec - countdownSec  && armed === true )    {
         timeSec  =   maxSec - countdownSec;
@@ -261,7 +262,7 @@ function countdown()    {
 }
 
 /** Countdown to zero   */
-function timerMod() {
+function timerMod() {                       //class     ModuleTIM   [ADDED]
     if (timeSec <= 0)   {
         phase = `Lose`;
     }
@@ -293,14 +294,14 @@ function moduleSelection()  {
 }
 
 /** If the Module is complete or not    */
-function displayComplete()  {
+function displayComplete()  {               //class     Node        [ADDED]
     nodeCompletion();
     
     rectMode(CENTER);
     fill(0, node.fill, 0);
     rect(node.x, node.y, node.size);
 }
-function nodeCompletion()   {
+function nodeCompletion()   {               //class     Node        [ADDED]
     if (node.completed  === true)   {
         node.fill   =   255;
         armed = false;
@@ -311,7 +312,7 @@ function nodeCompletion()   {
 
 
 /** Button Module   */
-function buttonModule() {
+function buttonModule() {                   //class     ModuleBTN   [ADDED]
     displayComplete();
     displayButton();
     displayLight();
@@ -322,7 +323,7 @@ function buttonModule() {
     pop();
 }
 
-function displayButton()    {
+function displayButton()    {               //class     ModuleBTN   [ADDED]
     butMod.but.x    =   node.x - 16;
     butMod.but.y    =   node.y - 16;
 
@@ -333,7 +334,7 @@ function displayButton()    {
     pop();
 }
 
-function buttonHeld()   {
+function buttonHeld()   {                   //class     ModuleBTN   [ADDED]
     fill(butMod.but.fill.r, butMod.but.fill.gb, butMod.but.fill.gb);
     butMod.but.fill.r   =   255;
     butMod.but.fill.gb  =   0;
@@ -355,7 +356,7 @@ function buttonHeld()   {
     }
 }
 
-function buttonInstructions()   {
+function buttonInstructions()   {           //class     ModuleBTN   [ADDED]
     let buttonTxt;
     let hintTxt =   `(use keyboard)`;
     
@@ -378,7 +379,7 @@ function buttonInstructions()   {
     pop();
 }
 
-function displayLight()   {
+function displayLight()   {                 //class     ModuleBTN   [ADDED]
     butMod.lit.x    =   node.x + 40;
     butMod.lit.y    =   node.y - 24;
     
@@ -455,7 +456,7 @@ function dorsalView()	{
         //DisplayImage
     push();
     imageMode(CENTER);
-    image(bombDisplayX, bomb.x, bomb.y, bomb.size2, bomb.size1);
+    image(bombDisplayX, bomb.x, bomb.y, bomb.size.x, bomb.size.x);
     pop();
 
     buttonModule();
@@ -562,13 +563,6 @@ function arrowsAxisY()  {
 	}
 		//Bottom Arrow:
 	if (mouseY >= height - 100)	{
-
-        push();
-        fill(100, 200, 50);
-        rectMode(CENTER);
-        rect(width/2, height -50, width, 100);
-        pop();
-
 		if (axisY === `Top`)	{
 			axisY = `Mid`;
 		} else if (axisY === `Mid`)	{
