@@ -36,8 +36,8 @@ let maxMin;
 let maxSec;
 
 let totalNodes      =   [];     //amount of "Nodes"
-let northNodes      =   [];
-let southNodes      =   [];
+//let northNodes      =   [];
+//let southNodes      =   [];
 let totalNodesNB    =   4;  //total amount of "Nodes"
 
 let modules =   {
