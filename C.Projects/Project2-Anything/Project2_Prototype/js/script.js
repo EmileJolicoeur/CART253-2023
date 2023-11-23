@@ -36,9 +36,20 @@ let maxMin;
 let maxSec;
 
 let totalNodes      =   [];     //amount of "Nodes"
-//let northNodes      =   [];
-//let southNodes      =   [];
-let totalNodesNB    =   4;  //total amount of "Nodes"
+let totalMaxNodes    =   4;  //total amount of "Nodes"
+
+let northNodes  =   [];
+let maxNorthNodes;
+let southNodes  =   [];
+let maxSouthNodes;
+
+/**
+ * let node;
+ * let timer;
+ * let button;
+ * let wires;
+ * let wordAssociation;
+ */
 
 let modules =   {
     //Number of Button Modules:
@@ -81,11 +92,14 @@ function setup()    {
     maxMin  =   floor(random(3, 8));
     maxSec  =   60*maxMin;
 
+
+
+
     //Creating Bomb obj:
     bomb    =   new Bomb(width/2, height/2);        //Creating the Bomb
 
     //Creating node & node amount based on totalNodesNB
-    for (let i = 0; i < totalNodesNB; i++)   {
+    for (let i = 0; i < totalMaxNodes; i++)   {
 
         //Checking Height & Width of Module in grid:
         let column  =   floor(random(1, 4));
@@ -126,10 +140,8 @@ function setup()    {
             timer.debugging(i)
 
         }
-
+    
     }
-
-
 }
 
 
