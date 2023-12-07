@@ -231,6 +231,7 @@ function startScreen()   {
     text	(`Click screen to start`, width/2, 2*height/3);  //in mousePressed() function
     pop();
 }
+
 function puzzleScreen()	{
     //bgValues();
 
@@ -526,6 +527,7 @@ function gameOverScreen()	{   //Completed
     text	(`Click to try again`, width/2, 2*height/3);
     pop();
 }
+
 function winScreen()	{       //Add final Timer
         //Elements for the Title:
     push();
@@ -649,7 +651,7 @@ function keyPressed()	{       //[1,2,3,4]
                 phase   =   `Lose`;
             }
         } else if (butMod.lit.colPick === 3)    {
-            if (key)    {
+            if (key === `u`)    {
                 phase   =   `Lose`;
             }
         }

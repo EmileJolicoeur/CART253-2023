@@ -200,18 +200,19 @@ function draw() {
 
     for (let i = 0; i < totalNodes.length; i++)  {
         let northNode    =   totalNodes[i];
-        let southNode   =   totalNodes[i];
+        //let southNode   =   totalNodes[i];
         if (bomb.axisX === `North`)   {
             timer.display();
-            !southNode.display();
+            //!southNode.display();
             northNode.display();
             
-        } else if (bomb.axisX === `South`)  {
-            !northNode.display();
-            southNode.display();
-        }
+        } 
+        // else if (bomb.axisX === `South`)  {
+        //     !northNode.display();
+        //     southNode.display();
+        // }
         
-    } 
+    }
 }
 
 function mousePressed() {
