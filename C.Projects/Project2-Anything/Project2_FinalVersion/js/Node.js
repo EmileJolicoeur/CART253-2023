@@ -173,7 +173,7 @@ class   Node    {
             this.scaled =   2/1.5;
             this.size   =   this.maxSize*this.scaled;
 
-//Possible addition of hint string?
+            //Displaying Hints for the player:
             if (this.type === `Button`) {
                 if (!mouseIsPressed)    {
                     push();
