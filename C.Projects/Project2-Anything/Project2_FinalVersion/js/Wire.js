@@ -1,64 +1,90 @@
 class   Wire    {
     constructor(x, y, size)   {
         //WireMod values:
-        this.x  =   x;
-        this.y  =   y;
-        this.size   =   size;
+        this.x              =   x;
+        this.y              =   y;
+        this.size           =   size;
         //Wires array:
-        this.cables =   [];
+        this.cables         =   [];
         this.totalCables    =   4;
         //Amount of Wires:
-        this.nbWires    =   0;
-        //Amounts of colored Wires:
-        this.wireNb =   {
-            b:  0,
-            c:  0,
-            m:  0,
-            y:  0,
-            r:  0,
-        };
-        //If the Wires are cut:
-        this.wiresToCut =   0;
-        this.completed  =   false;
-
+        this.nbWires        =   0;
         //Color of the Wires:
         this.color  =   undefined;
+        //Amount of Wires per color:
+        this.wireNb =   {
+            b:          0,
+            c:          0,
+            m:          0,
+            y:          0,
+            r:          0,
+        };
+        //The nb of wires to cut:
+        this.wiresToCut     =   0;
+        //If the Module is solved:
+        this.completed      =   false;
+
+
     }
 
     /** Generating Cables:  */
     cableSetup()    {
         for (let i = 0; i < this.totalCables; i++)   {
-            this.r  =   floor(random(0, 10))
+            //Random number used to generate the cable's color:
+            this.r  =   floor(random(0, 10));
+
             this.cableVariables(this.r);
+
+            //creating the cable:
             this.cable  =   this.createCables((3*(i)*8), this.r, this.color);
             this.cables.push(this.cable);
-            this.nbWires++;
+
         }
-        
-        //console.log(this.nbWires);
     }
 
     cableVariables(randomNB)    {
         if (randomNB === 0) {                           //Black
+            //Adding to the total nb of Black Cables:
             this.wireNb.b++;
+            //Adding to the total nb of Cables:
+            this.nbWires++;
+            //Adding to the total nb of Cables to cut:
             this.wiresToCut++;
+            //Cable color:
             this.color  =   `B`;
         }
         else if (randomNB === 1 || randomNB === 6)  {   //Cyan
+            //Adding to the total nb of Cyan Cables:
             this.wireNb.c++;
+            //Adding to the total nb of Cables:
+            this.nbWires++;
+            //Cable color:
             this.color  =   `C`;
         }
         else if (randomNB === 2 || randomNB === 7)  {   //Magenta
+            //Adding to the total nb of Magenta Cables:
             this.wireNb.m++;
+            //Adding to the total nb of Cables:
+            this.nbWires++;
+            //Cable color:
             this.color  =   `M`;
         }
         else if (randomNB === 3 || randomNB === 8)  {   //Yellow
+            //Adding to the total nb of Yellow Cables:
             this.wireNb.y++;
+            //Adding to the total nb of Cables:
+            this.nbWires++;
+            //Adding to the total nb of Cables to cut:
             this.wiresToCut++;
+            //Cable color:
             this.color  =   `Y`;
         }
         else if (randomNB === 4 || randomNB === 9)  {   //Red
+            //Adding to the total nb of Red Cables:
             this.wireNb.r++;
+            //Adding to the total nb of Cables:
+            this.nbWires++;
+            //Cable color:
             this.color  =   `R`;
         }
         else if (randomNB === 5)    {
@@ -70,18 +96,18 @@ class   Wire    {
     createCables(y, r, color)  {
         this.cable  =   {
             //Cable position:
-            x:  this.x,
-            posY:   (-46 + y),
-            y:  undefined,
+            x:          this.x,
+            posY:       (-46 + y),
+            y:          undefined,
             //Cable size:
-            w:  96,
-            h:  24,
+            w:          96,
+            h:          24,
             //Cable color randomizer:
-            r:  r,
+            r:          r,
             //Cutting wire value:
-            cut:    false,
+            cut:        false,
             //
-            color: color
+            color:      color,
         };
         return this.cable;
     }
@@ -93,7 +119,7 @@ class   Wire    {
         imageMode(CENTER);
         image(disWIR, this.x, this.y, this.size*s, this.size*s);
         pop();
-        //Displaying cables:
+        //Displaying Cables:
         for (let i = 0; i < this.cables.length; i++) {
             this.cableDisplay(this.cables[i], s);
         }
@@ -102,7 +128,7 @@ class   Wire    {
 
     /** Displaying Cables:  */
     cableDisplay(cable, s)    {
-
+        //Determining which & how many Cables to cut in order to solve the WireMod:
         let ref    =   true;
         for (let i = 0; i < this.cables.length; i++)  {
             if (this.cables[i].color === `B` && this.cables[i].cut === false || this.cables[i].color === `Y` && this.cables[i].cut === false)    {
@@ -113,18 +139,23 @@ class   Wire    {
                 //console.log(this.cables[i].cut);
             }
         }
-
+        //If all wires are cut:
         if (ref === true)  {
             this.completed  =   true;
         }
 
         this.mouseClicked(cable);
+
+        //Calculating distance between the Mouse and Cable:
         this.d  =   dist(mouseX, mouseY, cable.x, cable.y);
 
+        //Cable position (implementing Node scaling):
         cable.y = this.y + cable.posY*s;
 
+        //Displaying the Cable based on color:
         if (cable.cut != true)    {
             if (this.d <= cable.w/2 || this.d <= cable.h/2) {
+                //When mouse is not overlapping:
                 if (cable.r === 0)  {
                     this.displayBlackCableH(cable, s);
                 }
@@ -141,6 +172,7 @@ class   Wire    {
                     this.displayRedCableH(cable, s);
                 }
             }
+            //When mouse is overlapping:
             else    {
                 if (cable.r === 0)  {
                     this.displayBlackCable(cable, s);
@@ -163,8 +195,11 @@ class   Wire    {
 
     /** Mouse Click:    */
     mouseClicked(cable)  {
+        
+        //Calculating distance between the Mouse and Cable:
         this.d  =   dist(mouseX, mouseY, cable.x, cable.y);
 
+        //Not displaying the cable if it is cut:
         if (this.d <= cable.w/2 || this.d <= cable.h/2) {
             if (mouseIsPressed === true)    {
                 cable.cut   =   true;
@@ -207,7 +242,7 @@ class   Wire    {
         pop();
     }
 
-    /** Cables when the mouse is hovering:  */
+    /** Cables when the mouse is overlapping:   */
     displayBlackCableH(cable, s)    {
         push();
         imageMode(CENTER);

@@ -1,3 +1,4 @@
-# Template p5 project
+# CART 253: Project 2: "Keep Trying and Don't Detonate!"
+By Emile Jolicoeur
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+This project, heavily inspired by the co-op game Keep Talking And Nobody Explodes is a second version of Project 1: Simulation. This single player bootleg is a test of my abilities using the p5. libraries and apply the resources learned within this past semester. After starting the game, the player appear in front of the bomb. Using the  mouse, the player must rotate the bomb in order to see

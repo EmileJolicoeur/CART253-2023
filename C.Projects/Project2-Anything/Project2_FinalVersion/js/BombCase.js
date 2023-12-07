@@ -18,7 +18,6 @@ class   Bomb    {
         if (this.axisY === `Mid`)   {
             //Displaying the Bomb based on X-Axis:
             this.displayHorizontal();
-
             //Screen Buttons:
             this.topArrow();
             this.botArrow();
@@ -26,14 +25,12 @@ class   Bomb    {
         else if (this.axisY === `Top`)  {
             //Displaying bomb.topView:
             this.topView();
-
             //Screen Buttons:
             this.botArrow();
         }
         else if (this.axisY === `Bot`)  {
             //Displaying bomb.bottomViews:
             this.bottomView();
-
             //Screen Buttons:
             this.topArrow();
         } 
@@ -41,14 +38,13 @@ class   Bomb    {
 
     /** Screen Button at the bottom of the screen:  */
     topArrow()  {
-        //Button values:
-            //Position:
+        //Button Position:
         let arrowX  =   width/2;
         let arrowY  =   50;
-            //Size:
+        //Button Size:
         let arrowW  =   width;
         let arrowH  =   100;
-        
+
         //Distance between mouse and Button:
         let dx  =   mouseX - arrowX;
         let dy  =   mouseY - arrowY;
@@ -65,11 +61,10 @@ class   Bomb    {
 
     /** Screen Button at the bottom of the screen:  */
     botArrow()  {
-        //Button values:
-            //Position:
+        //Button Position:
         let arrowX  =   width/2;
         let arrowY  =   height - 50;
-            //Size:
+        //Button Size:
         let arrowW  =   width;
         let arrowH  =   100;
         
@@ -199,20 +194,18 @@ class   Bomb    {
         pop();
     }
 
-    /** Controls:   */
+    /** Controls:   Facing of the Bomb: */
     mouseClick()    {
         //Controls:
         this.rotateY();
         this.rotateX();
-
-        //Debug:
-        //this.debugging();
     }
     
     /** Controls on Y Axis: */
     rotateY()   {
         //Top Arrow hitbox:
         if (mouseY <= 100)	{
+            //On what faces it appears:
             if (this.axisY === `Bot`)	{
                 this.axisY = `Mid`;
             }
@@ -221,8 +214,9 @@ class   Bomb    {
             }
         }
         //Bottom Arrow hitbox:
-        if (mouseY >= height - 100)	{
-            if (this.axisY === `Top`)	{
+        if (mouseY >= height - 100) {
+            //On what faces it appears:
+            if (this.axisY === `Top`)   {
                 this.axisY = `Mid`;
             }
             else if (this.axisY === `Mid`)  {
@@ -236,6 +230,7 @@ class   Bomb    {
         if (this.axisY === `Mid`)    {
 			    //Left Arrow hitbox:
             if (mouseX <= (width/2) +355)  {
+                //On what faces it appears:
                 if (this.axisX === `North`) {
                     this.axisX = `West`;
                 }
@@ -251,6 +246,7 @@ class   Bomb    {
             }
                 //Right Arrow hitbox:
             if (mouseX >= (width/2) -355)	{
+                //On what faces it appears:
                 if (this.axisX === `North`) {
                     this.axisX = `East`;
                 }

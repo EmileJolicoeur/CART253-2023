@@ -651,7 +651,7 @@ function keyPressed()	{       //[1,2,3,4]
                 phase   =   `Lose`;
             }
         } else if (butMod.lit.colPick === 3)    {
-            if (key === `u`)    {
+            if (key)    {
                 phase   =   `Lose`;
             }
         }

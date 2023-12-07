@@ -1,17 +1,17 @@
 class   Timer   {
     constructor(x, y, size, maxMin, maxSec)   {
         //Timer Module's Node variables:
-        this.x  =   x;
-        this.y  =   y;
-        this.size   =   size;
+        this.x              =   x;
+        this.y              =   y;
+        this.size           =   size;
  
         //Arming the bomb:
-        this.armed  =   true;
+        this.armed          =   true;
          
         //Timer values:
-        this.maxMin =   maxMin;
-        this.maxSec =   maxSec;
-        this.timeSec    =   undefined;
+        this.maxMin         =   maxMin;
+        this.maxSec         =   maxSec;
+        this.timeSec        =   undefined;
         this.countdownSec   =   undefined;
     }
 
@@ -26,7 +26,7 @@ class   Timer   {
             beep();
         }
 
-        //Explosion:
+        //Game Over when the Countdown reaches 0:
         if (this.timeSec <= 0)  {
             gamePhase   =   `lost`;
         }
@@ -58,9 +58,8 @@ class   Timer   {
         pop();
     }
     
-    //Timer Debugging Info:
+    //Debugging:    Countdown:
     debugging()    {
         console.log(`${i}: tim:\nX = ${timer.x},\nY = ${timer.y},\nZ = ${timer.z}`);
-
     }
 }
