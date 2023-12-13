@@ -139,7 +139,6 @@ class   Bomb    {
         }
     }
 
-
     /** Displaying the front of the bomb:   */
     frontalView()   {
         //Image:

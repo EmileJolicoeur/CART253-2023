@@ -1,13 +1,18 @@
 /**
  * Keep Trying and don't  Detonate!
- * Emile Jolicoeur
+ * Émile Jolicoeur
  * 
- * This is a template. You must fill in the title, author, 
- * and this description to match your project!
+ * Special Thanks to:
+ * - Lee Wilkins
+ * - Stephen Friedrich
+ * - Dr. Pippin Barr
+ * 
+ * Attributions:
+ * - p5js.org                   [uses for keyTyped function]
+ * - Claude-André Jolicoeur     [beep function]
  */
 
 "use strict";
-
 
 /** Image Variables:    */
 let caseImg =                   [];
@@ -53,7 +58,6 @@ let maxSouthNodes   =           0;
 
 /** Creating the different game states: */
 let gamePhase   =               `start`;
-
 
 
 /** Loading Sounds & Images:    */

@@ -150,14 +150,12 @@ class   Node    {
         }
     }
 
-
     /** Displaying the physical Node:   */
     displayNode()   {
         if (this.displayed === true)    {
             this.displayModule();
         }
     }
-
     
     /** Making the visible Nodes scale up when the mouse is hovering above them:*/
     mouseHover()    {

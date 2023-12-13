@@ -23,8 +23,6 @@ class   Wire    {
         this.wiresToCut     =   0;
         //If the Module is solved:
         this.completed      =   false;
-
-
     }
 
     /** Generating Cables:  */
@@ -123,7 +121,6 @@ class   Wire    {
         for (let i = 0; i < this.cables.length; i++) {
             this.cableDisplay(this.cables[i], s);
         }
-
     }
 
     /** Displaying Cables:  */
@@ -136,7 +133,6 @@ class   Wire    {
             }
             if (this.cables[i].color === `C` && this.cables[i].cut === true || this.cables[i].color === `M` && this.cables[i].cut === true || this.cables[i].color === `R` && this.cables[i].cut === true)  {
                 gamePhase   =   `lost`;
-                //console.log(this.cables[i].cut);
             }
         }
         //If all wires are cut:
@@ -217,24 +213,28 @@ class   Wire    {
         image(disBlaWire, cable.x, cable.y, cable.w*s, cable.h*s);
         pop();
     }
+    
     displayCyanCable(cable, s)  {
         push();
         imageMode(CENTER);
         image(disCyaWire, cable.x, cable.y, cable.w*s, cable.h*s);
         pop();
     }
+    
     displayMagentaCable(cable, s)   {
         push();
         imageMode(CENTER);
         image(disMagWire, cable.x, cable.y, cable.w*s, cable.h*s);
         pop();
     }
+    
     displayYellowCable(cable, s)    {
         push();
         imageMode(CENTER);
         image(disYelWire, cable.x, cable.y, cable.w*s, cable.h*s);
         pop();
     }
+    
     displayRedCable(cable, s)   {
         push();
         imageMode(CENTER);
@@ -249,24 +249,28 @@ class   Wire    {
         image(disBlaWireH, cable.x, cable.y, cable.w*s, cable.h*s);
         pop();
     }
+    
     displayCyanCableH(cable, s) {
         push();
         imageMode(CENTER);
         image(disCyaWireH, cable.x, cable.y, cable.w*s, cable.h*s);
         pop();
     }
+    
     displayMagentaCableH(cable, s)  {
         push();
         imageMode(CENTER);
         image(disMagWireH, cable.x, cable.y, cable.w*s, cable.h*s);
         pop();
     }
+    
     displayYellowCableH(cable, s)   {
         push();
         imageMode(CENTER);
         image(disYelWireH, cable.x, cable.y, cable.w*s, cable.h*s);
         pop();
     }
+    
     displayRedCableH(cable, s)  {
         push();
         imageMode(CENTER);
