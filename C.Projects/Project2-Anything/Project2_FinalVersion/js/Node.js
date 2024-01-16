@@ -141,7 +141,7 @@ class   Node    {
                     this.type   =   `WAG`;
 
                     //Creating the type of module:
-                    this.wagMod =   new WordAssociationGame(this.x, this.y, this.size, this.scaled);
+                    this.wagMod =   new WordAssociationGame(this.x, this.y, this.size);
                     //Module Object properties:
                     this.wagMod.wordGenerator();
                     this.wagMod.buttonSetup();

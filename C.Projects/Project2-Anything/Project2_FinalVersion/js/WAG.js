@@ -26,16 +26,16 @@ class   WordAssociationGame {
             this.buttons.push(this.button);
         }
         //Array of buttons:
-        this.buttons[0]  =   this.createButton(-1, -1, -0.5, `Red`   , );
-        this.buttons[1]  =   this.createButton( 1, -1, -0.5, `Green` , );
-        this.buttons[2]  =   this.createButton(-1,  1,  3.5, `Yellow`, );
-        this.buttons[3]  =   this.createButton( 1,  1,  3.5, `Blue`  , );
+        this.buttons[0]  =   this.createButton(-1, -1, -0.5, `Red`   );
+        this.buttons[1]  =   this.createButton( 1, -1, -0.5, `Green` );
+        this.buttons[2]  =   this.createButton(-1,  1,  3.5, `Yellow`);
+        this.buttons[3]  =   this.createButton( 1,  1,  3.5, `Blue`  );
         
         console.log(this.buttons);
     }
 
     /** Creating the different buttons on the module:   */
-    createButton(r, c, y, color, )  {
+    createButton(r, c, y, color)  {
         this.button =   {
             //Color label:
             name:   color,

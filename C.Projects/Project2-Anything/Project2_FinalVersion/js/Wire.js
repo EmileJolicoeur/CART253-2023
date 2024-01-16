@@ -86,7 +86,7 @@ class   Wire    {
             this.color  =   `R`;
         }
         else if (randomNB === 5)    {
-            this.color  =   `NaN`
+            this.color  =   `NaN`;
         }
     }
 
@@ -100,12 +100,11 @@ class   Wire    {
             //Cable size:
             w:          96,
             h:          24,
-            //Cable color randomizer:
+            //Cable color values:
             r:          r,
+            color:      color,
             //Cutting wire value:
             cut:        false,
-            //
-            color:      color,
         };
         return this.cable;
     }
@@ -140,7 +139,6 @@ class   Wire    {
             this.completed  =   true;
         }
 
-        this.mouseClicked(cable);
 
         //Calculating distance between the Mouse and Cable:
         this.d  =   dist(mouseX, mouseY, cable.x, cable.y);
@@ -150,8 +148,8 @@ class   Wire    {
 
         //Displaying the Cable based on color:
         if (cable.cut != true)    {
-            if (this.d <= cable.w/2 || this.d <= cable.h/2) {
-                //When mouse is not overlapping:
+            if (this.d <= cable.w*s/2 || this.d <= cable.h*s/2) {
+                //When mouse is overlapping:
                 if (cable.r === 0)  {
                     this.displayBlackCableH(cable, s);
                 }
@@ -167,8 +165,10 @@ class   Wire    {
                 else if (cable.r === 4 || cable.r === 9)    {
                     this.displayRedCableH(cable, s);
                 }
+                
+                this.mouseClicked(cable, s);
             }
-            //When mouse is overlapping:
+            //When mouse is not overlapping:
             else    {
                 if (cable.r === 0)  {
                     this.displayBlackCable(cable, s);
@@ -190,13 +190,9 @@ class   Wire    {
     }
 
     /** Mouse Click:    */
-    mouseClicked(cable)  {
-        
-        //Calculating distance between the Mouse and Cable:
-        this.d  =   dist(mouseX, mouseY, cable.x, cable.y);
-
+    mouseClicked(cable, s)  {
         //Not displaying the cable if it is cut:
-        if (this.d <= cable.w/2 || this.d <= cable.h/2) {
+        if (this.d <= cable.w*s/2 || this.d <= cable.h*s/2) {
             if (mouseIsPressed === true)    {
                 cable.cut   =   true;
             }
